@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/database.js";
+import { DataTypes, Model } from 'sequelize'
+import sequelize from '../config/database.js'
 
 class User extends Model {
     declare id: number
@@ -8,8 +8,6 @@ class User extends Model {
     declare activo: boolean
     declare createdAt: Date
     declare updatedAt: Date
-
-
 }
 
 User.init(
