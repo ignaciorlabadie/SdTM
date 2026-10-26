@@ -5,7 +5,7 @@ class User extends Model {
     declare id: number
     declare email: string
     declare password: string
-    declare activo: boolean
+    declare active: boolean
     declare createdAt: Date
     declare updatedAt: Date
 }
@@ -30,7 +30,7 @@ User.init(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        activo: {
+        active: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: true,
