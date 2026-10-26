@@ -83,7 +83,9 @@ export class AdminService {
         }
 
         if (data.dni && data.dni !== admin.dni) {
-            const existingDni = await Admin.findOne({ where: { dni: data.dni } })
+            const existingDni = await Admin.findOne({
+                where: { dni: data.dni },
+            })
             if (existingDni && existingDni.id !== id) {
                 throw new AppError(409, MESSAGES.DNI_YA_REGISTRADO)
             }

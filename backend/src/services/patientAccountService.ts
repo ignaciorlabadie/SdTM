@@ -10,11 +10,14 @@ export class PatientAccountService {
     async createPatientAccount(datos: CreatePatientAccount) {
         const t = await sequelize.transaction()
         try {
-            const existingUser = await patientService.getPatientByUserId
+            const existingUser = (await patientService.getPatientByUserId)
                 ? null
                 : null
 
-            const existingDni = await Patient.findOne({ where: { dni: datos.dni }, transaction: t })
+            const existingDni = await Patient.findOne({
+                where: { dni: datos.dni },
+                transaction: t,
+            })
             if (existingDni) {
                 throw new AppError(409, MESSAGES.DNI_YA_REGISTRADO)
             }
