@@ -1,16 +1,13 @@
 import User from '../models/UserModel.js'
-import type { CreateAccount } from '../types/user/CreateAccountType.js'
-import type { UpdateAccount } from '../types/user/UpdateAccountType.js'
+import type { CreateAccount } from '../types/user/CreateAccount.js'
+import type { UpdateAccount } from '../types/user/UpdateAccount.js'
 import { AppError } from '../errors/AppError.js'
 import { MESSAGES } from '../errors/messages.js'
 import { hashPassword } from '../utils/passwords.js'
 import { normalizeEmail } from '../utils/validation.js'
+import { UserAttributes as userAttributes } from '../types/user/UserAttributes.js'
 
-const userAttributes = {
-    attributes: { exclude: ['password'] },
-}
-
-export class usuarioService {
+export class UserService {
     async getAllUsers() {
         return await User.findAll({
             ...userAttributes,
@@ -98,4 +95,4 @@ export class usuarioService {
     }
 }
 
-export const userService = new usuarioService()
+export const userService = new UserService()

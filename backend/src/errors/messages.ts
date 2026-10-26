@@ -6,6 +6,8 @@ export const MESSAGES = {
     ALTA_PACIENTE_EN_PACIENTES:
         'El alta de pacientes se realiza en POST /pacientes (crea el usuario y su perfil)',
     USUARIO_NO_ENCONTRADO: 'Usuario no encontrado',
+    PACIENTE_NO_ENCONTRADO: 'Paciente no encontrado',
+    NO_HAY_PACIENTES: 'No hay pacientes',
     PROFESIONAL_NO_ENCONTRADO: 'Profesional no encontrado',
     ROL_PROFESIONAL_REQUERIDO: 'La cuenta debe tener el rol PROFESIONAL',
     MATRICULA_YA_REGISTRADA: 'La matrícula ya está registrada',
