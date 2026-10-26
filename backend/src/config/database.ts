@@ -21,7 +21,7 @@ const sequelize = databaseUrl
           },
       })
     : new Sequelize(
-          process.env.DB_NAME || 'tfi_turnos',
+          process.env.DB_NAME || 'sdtm_db',
           process.env.DB_USER || 'postgres',
           process.env.DB_PASSWORD || 'postgres',
           {

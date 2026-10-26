@@ -1,5 +1,5 @@
 {
-    "name": "sdtm",
+    "name": "sdtm_backend",
     "version": "1.0.0",
     "description": "",
     "main": "dist/server.ts",
