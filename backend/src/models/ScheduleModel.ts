@@ -1,17 +1,26 @@
-import { DataTypes, Model } from 'sequelize'
+import {
+    DataTypes,
+    Model,
+    type CreationOptional,
+    type InferAttributes,
+    type InferCreationAttributes,
+} from 'sequelize'
 import sequelize from '../config/database.js'
 import type { WeekDay } from '../types/schedule/WeekDayType.js'
 
-class Schedule extends Model {
-    declare id: number
+class Schedule extends Model<
+    InferAttributes<Schedule>,
+    InferCreationAttributes<Schedule>
+> {
+    declare id: CreationOptional<number>
     declare professionalId: number
     declare weekDay: WeekDay
     declare startTime: string
     declare endTime: string
     declare appointmentDuration: number
-    declare active: boolean
-    declare createdAt: Date
-    declare updatedAt: Date
+    declare active: CreationOptional<boolean>
+    declare createdAt: CreationOptional<Date>
+    declare updatedAt: CreationOptional<Date>
 }
 
 Schedule.init(
@@ -65,6 +74,14 @@ Schedule.init(
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: true,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
         },
     },
     {

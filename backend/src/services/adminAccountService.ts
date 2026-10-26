@@ -10,7 +10,10 @@ export class AdminAccountService {
     async createAdminAccount(datos: CreateAdminAccount) {
         const t = await sequelize.transaction()
         try {
-            const existingDni = await Admin.findOne({ where: { dni: datos.dni }, transaction: t })
+            const existingDni = await Admin.findOne({
+                where: { dni: datos.dni },
+                transaction: t,
+            })
             if (existingDni) {
                 throw new AppError(409, MESSAGES.DNI_YA_REGISTRADO)
             }
