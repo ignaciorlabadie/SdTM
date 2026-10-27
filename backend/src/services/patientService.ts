@@ -119,6 +119,15 @@ export class PatientService {
         if (!patient) {
             throw new AppError(404, MESSAGES.PACIENTE_NO_ENCONTRADO)
         }
+
+        const Appointment = (await import('../models/AppointmentModel.js')).default
+        const activeAppointments = await Appointment.findAll({
+            where: { patientId: id, status: ['PENDIENTE', 'CONFIRMADO'] },
+        })
+        if (activeAppointments.length > 0) {
+            throw new AppError(400, MESSAGES.PACIENTE_CON_TURNOS_ACTIVOS)
+        }
+
         await patient.destroy()
         return { message: 'Paciente eliminado correctamente' }
     }
@@ -128,6 +137,16 @@ export class PatientService {
         if (!patient) {
             throw new AppError(404, MESSAGES.PACIENTE_NO_ENCONTRADO)
         }
+
+        const Appointment = (await import('../models/AppointmentModel.js')).default
+        const activeAppointments = await Appointment.findAll({
+            where: { patientId: id, status: ['PENDIENTE', 'CONFIRMADO'] },
+            paranoid: false,
+        })
+        if (activeAppointments.length > 0) {
+            throw new AppError(400, MESSAGES.PACIENTE_CON_TURNOS_ACTIVOS)
+        }
+
         await patient.destroy({ force: true })
         return { message: 'Paciente eliminado definitivamente' }
     }

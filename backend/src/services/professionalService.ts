@@ -145,6 +145,20 @@ export class ProfessionalService {
         if (!professional) {
             throw new AppError(404, MESSAGES.PROFESIONAL_NO_ENCONTRADO)
         }
+
+        const Appointment = (await import('../models/AppointmentModel.js')).default
+        const Schedule = (await import('../models/ScheduleModel.js')).default
+        const activeAppointments = await Appointment.findAll({
+            where: { professionalId: id, status: ['PENDIENTE', 'CONFIRMADO'] },
+        })
+        if (activeAppointments.length > 0) {
+            throw new AppError(400, MESSAGES.PROFESIONAL_CON_TURNOS_ACTIVOS)
+        }
+        const schedules = await Schedule.findAll({ where: { professionalId: id } })
+        if (schedules.length > 0) {
+            throw new AppError(400, MESSAGES.PROFESIONAL_CON_HORARIOS_ACTIVOS)
+        }
+
         await professional.destroy()
         return { message: 'Profesional eliminado correctamente' }
     }
@@ -154,6 +168,21 @@ export class ProfessionalService {
         if (!professional) {
             throw new AppError(404, MESSAGES.PROFESIONAL_NO_ENCONTRADO)
         }
+
+        const Appointment = (await import('../models/AppointmentModel.js')).default
+        const Schedule = (await import('../models/ScheduleModel.js')).default
+        const activeAppointments = await Appointment.findAll({
+            where: { professionalId: id, status: ['PENDIENTE', 'CONFIRMADO'] },
+            paranoid: false,
+        })
+        if (activeAppointments.length > 0) {
+            throw new AppError(400, MESSAGES.PROFESIONAL_CON_TURNOS_ACTIVOS)
+        }
+        const schedules = await Schedule.findAll({ where: { professionalId: id }, paranoid: false })
+        if (schedules.length > 0) {
+            throw new AppError(400, MESSAGES.PROFESIONAL_CON_HORARIOS_ACTIVOS)
+        }
+
         await professional.destroy({ force: true })
         return { message: 'Profesional eliminado definitivamente' }
     }

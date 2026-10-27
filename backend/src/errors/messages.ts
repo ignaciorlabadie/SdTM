@@ -31,4 +31,10 @@ export const MESSAGES = {
     APPOINTMENT_INVALID_DAY: 'El día de la fecha no corresponde al día de la agenda',
     CREDENCIALES_INVALIDAS: 'Credenciales inválidas',
     USUARIO_INACTIVO: 'Usuario inactivo',
+    PACIENTE_CON_TURNOS_ACTIVOS:
+        'No se puede eliminar el paciente con turnos pendientes o confirmados',
+    PROFESIONAL_CON_TURNOS_ACTIVOS:
+        'No se puede eliminar el profesional con turnos pendientes o confirmados',
+    PROFESIONAL_CON_HORARIOS_ACTIVOS:
+        'No se puede eliminar el profesional con horarios asignados',
 } as const
