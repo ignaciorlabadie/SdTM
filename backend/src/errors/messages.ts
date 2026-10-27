@@ -12,4 +12,5 @@ export const MESSAGES = {
     ROL_PROFESIONAL_REQUERIDO: 'La cuenta debe tener el rol PROFESIONAL',
     MATRICULA_YA_REGISTRADA: 'La matrícula ya está registrada',
     PERFIL_YA_ASIGNADO: 'La cuenta ya tiene un perfil profesional asignado',
+    APPOINTMENT_NOT_FOUND: 'El turno no fue encontrado',
 } as const
