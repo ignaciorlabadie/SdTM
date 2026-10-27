@@ -1,19 +1,28 @@
-import { DataTypes, Model } from 'sequelize'
+import {
+    DataTypes,
+    Model,
+    type CreationOptional,
+    type InferAttributes,
+    type InferCreationAttributes,
+} from 'sequelize'
 import sequelize from '../config/database.js'
 import type { AppointmentStatus } from '../types/appointment/AppointmentStatusType.js'
 
-class Appointment extends Model {
-    declare id: number
+class Appointment extends Model<
+    InferAttributes<Appointment>,
+    InferCreationAttributes<Appointment>
+> {
+    declare id: CreationOptional<number>
     declare patientId: number
     declare professionalId: number
     declare scheduleId: number
     declare date: string
     declare time: string
-    declare status: AppointmentStatus
+    declare status: CreationOptional<AppointmentStatus>
     declare motive: string
     declare observations?: string | null
-    declare createdAt: Date
-    declare updatedAt: Date
+    declare createdAt: CreationOptional<Date>
+    declare updatedAt: CreationOptional<Date>
 }
 
 Appointment.init(
@@ -91,6 +100,14 @@ Appointment.init(
         observations: {
             type: DataTypes.TEXT,
             allowNull: true,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
         },
     },
     {
