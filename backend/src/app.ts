@@ -2,6 +2,8 @@ import 'dotenv/config'
 import cors from 'cors'
 import express from 'express'
 import sequelize from './config/database.js'
+import routes from './routes/index.js'
+import { errorHandler } from './middlewares/errorHandler.js'
 
 const app = express()
 
@@ -30,5 +32,9 @@ app.get('/health', async (_req, res) => {
         })
     }
 })
+
+app.use(routes)
+
+app.use(errorHandler)
 
 export default app

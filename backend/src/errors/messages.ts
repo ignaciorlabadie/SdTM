@@ -29,4 +29,6 @@ export const MESSAGES = {
     APPOINTMENT_TIME_OUTSIDE_SCHEDULE:
         'La hora del turno se encuentra fuera del horario del profesional',
     APPOINTMENT_INVALID_DAY: 'El día de la fecha no corresponde al día de la agenda',
+    CREDENCIALES_INVALIDAS: 'Credenciales inválidas',
+    USUARIO_INACTIVO: 'Usuario inactivo',
 } as const
