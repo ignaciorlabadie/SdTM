@@ -82,9 +82,9 @@ export class AdminService {
             throw new AppError(404, MESSAGES.USUARIO_NO_ENCONTRADO)
         }
 
-        if (data.dni && data.dni !== admin.dni) {
+        if ((data as any).dni && (data as any).dni !== (admin as any).dni) {
             const existingDni = await Admin.findOne({
-                where: { dni: data.dni },
+                where: { dni: (data as any).dni },
             })
             if (existingDni && existingDni.id !== id) {
                 throw new AppError(409, MESSAGES.DNI_YA_REGISTRADO)
@@ -102,6 +102,15 @@ export class AdminService {
         }
         await admin.destroy()
         return { message: 'Administrador eliminado correctamente' }
+    }
+
+    async forceDeleteAdmin(id: number) {
+        const admin = await Admin.findByPk(id, { paranoid: false })
+        if (!admin) {
+            throw new AppError(404, MESSAGES.USUARIO_NO_ENCONTRADO)
+        }
+        await admin.destroy({ force: true })
+        return { message: 'Administrador eliminado definitivamente' }
     }
 }
 

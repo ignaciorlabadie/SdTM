@@ -8,10 +8,11 @@ class Professional extends Model {
     declare lastname: string
     declare dni: string
     declare cellphone: string
-    declare specialty: string
     declare licenseNumber: string
+    declare speciality: string
     declare createdAt: Date
     declare updatedAt: Date
+    declare deletedAt: Date | null
 }
 
 Professional.init(
@@ -80,11 +81,16 @@ Professional.init(
                 len: [1, 30],
             },
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     },
     {
         sequelize,
         tableName: 'professionals',
         timestamps: true,
+        paranoid: true,
     },
 )
 

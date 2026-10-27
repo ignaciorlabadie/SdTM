@@ -93,6 +93,15 @@ export class UserService {
         await user.destroy()
         return { message: 'Usuario eliminado correctamente' }
     }
+
+    async forceDeleteUser(userId: number) {
+        const user = await User.findByPk(userId, { paranoid: false })
+        if (!user) {
+            throw new AppError(404, MESSAGES.USUARIO_NO_ENCONTRADO)
+        }
+        await user.destroy({ force: true })
+        return { message: 'Usuario eliminado definitivamente' }
+    }
 }
 
 export const userService = new UserService()

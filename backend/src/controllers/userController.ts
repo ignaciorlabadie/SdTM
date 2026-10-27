@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from 'express'
 import { userService } from '../services/userService.js'
-import { AppError } from '../errors/AppError.js'
 
 export class UserController {
     async getAllUsers(_req: Request, res: Response, next: NextFunction) {
@@ -46,6 +45,16 @@ export class UserController {
         try {
             const id = Number(req.params.id)
             const result = await userService.deleteUser(id)
+            return res.status(200).json(result)
+        } catch (error) {
+            return next(error)
+        }
+    }
+
+    async forceDeleteUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id)
+            const result = await userService.forceDeleteUser(id)
             return res.status(200).json(result)
         } catch (error) {
             return next(error)

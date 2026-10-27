@@ -12,6 +12,7 @@ class Patient extends Model {
     declare address: string
     declare createdAt: Date
     declare updatedAt: Date
+    declare deletedAt: Date | null
 }
 
 Patient.init(
@@ -74,11 +75,16 @@ Patient.init(
                 len: [3, 150],
             },
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     },
     {
         sequelize,
         tableName: 'patients',
         timestamps: true,
+        paranoid: true,
     },
 )
 

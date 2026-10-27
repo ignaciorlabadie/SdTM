@@ -63,6 +63,16 @@ export class PatientController {
             return next(error)
         }
     }
+
+    async forceDeletePatient(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id)
+            const result = await patientService.forceDeletePatient(id)
+            return res.status(200).json(result)
+        } catch (error) {
+            return next(error)
+        }
+    }
 }
 
 export const patientController = new PatientController()

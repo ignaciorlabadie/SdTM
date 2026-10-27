@@ -10,6 +10,7 @@ class Admin extends Model {
     declare cellphone: string
     declare createdAt: Date
     declare updatedAt: Date
+    declare deletedAt: Date | null
 }
 
 Admin.init(
@@ -60,11 +61,16 @@ Admin.init(
                 len: [6, 25],
             },
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     },
     {
         sequelize,
         tableName: 'admins',
         timestamps: true,
+        paranoid: true,
     },
 )
 

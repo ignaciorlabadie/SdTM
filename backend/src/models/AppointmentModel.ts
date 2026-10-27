@@ -23,6 +23,7 @@ class Appointment extends Model<
     declare observations?: string | null
     declare createdAt: CreationOptional<Date>
     declare updatedAt: CreationOptional<Date>
+    declare deletedAt: Date | null
 }
 
 Appointment.init(
@@ -109,11 +110,16 @@ Appointment.init(
             type: DataTypes.DATE,
             allowNull: false,
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     },
     {
         sequelize,
         tableName: 'appointments',
         timestamps: true,
+        paranoid: true,
     },
 )
 

@@ -96,6 +96,16 @@ export class AppointmentController {
             return next(error)
         }
     }
+
+    async forceDeleteAppointment(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id)
+            const result = await appointmentService.forceDeleteAppointment(id)
+            return res.status(200).json(result)
+        } catch (error) {
+            return next(error)
+        }
+    }
 }
 
 export const appointmentController = new AppointmentController()

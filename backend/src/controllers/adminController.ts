@@ -50,6 +50,16 @@ export class AdminController {
             return next(error)
         }
     }
+
+    async forceDeleteAdmin(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id)
+            const result = await adminService.forceDeleteAdmin(id)
+            return res.status(200).json(result)
+        } catch (error) {
+            return next(error)
+        }
+    }
 }
 
 export const adminController = new AdminController()

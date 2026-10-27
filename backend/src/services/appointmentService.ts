@@ -306,6 +306,15 @@ export class AppointmentService {
         await appointment.destroy()
         return { message: 'Turno eliminado correctamente' }
     }
+
+    async forceDeleteAppointment(id: number) {
+        const appointment = await Appointment.findByPk(id, { paranoid: false })
+        if (!appointment) {
+            throw new AppError(404, MESSAGES.APPOINTMENT_NOT_FOUND)
+        }
+        await appointment.destroy({ force: true })
+        return { message: 'Turno eliminado definitivamente' }
+    }
 }
 
 export const appointmentService = new AppointmentService()

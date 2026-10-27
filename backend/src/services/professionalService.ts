@@ -148,6 +148,15 @@ export class ProfessionalService {
         await professional.destroy()
         return { message: 'Profesional eliminado correctamente' }
     }
+
+    async forceDeleteProfessional(id: number) {
+        const professional = await Professional.findByPk(id, { paranoid: false })
+        if (!professional) {
+            throw new AppError(404, MESSAGES.PROFESIONAL_NO_ENCONTRADO)
+        }
+        await professional.destroy({ force: true })
+        return { message: 'Profesional eliminado definitivamente' }
+    }
 }
 
 export const professionalService = new ProfessionalService()

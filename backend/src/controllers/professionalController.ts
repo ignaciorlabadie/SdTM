@@ -73,6 +73,16 @@ export class ProfessionalController {
             return next(error)
         }
     }
+
+    async forceDeleteProfessional(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id)
+            const result = await professionalService.forceDeleteProfessional(id)
+            return res.status(200).json(result)
+        } catch (error) {
+            return next(error)
+        }
+    }
 }
 
 export const professionalController = new ProfessionalController()

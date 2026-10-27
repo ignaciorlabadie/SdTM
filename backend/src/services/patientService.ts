@@ -122,6 +122,15 @@ export class PatientService {
         await patient.destroy()
         return { message: 'Paciente eliminado correctamente' }
     }
+
+    async forceDeletePatient(id: number) {
+        const patient = await Patient.findByPk(id, { paranoid: false })
+        if (!patient) {
+            throw new AppError(404, MESSAGES.PACIENTE_NO_ENCONTRADO)
+        }
+        await patient.destroy({ force: true })
+        return { message: 'Paciente eliminado definitivamente' }
+    }
 }
 
 export const patientService = new PatientService()

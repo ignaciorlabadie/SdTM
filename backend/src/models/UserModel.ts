@@ -8,6 +8,7 @@ class User extends Model {
     declare active: boolean
     declare createdAt: Date
     declare updatedAt: Date
+    declare deletedAt: Date | null
 }
 
 User.init(
@@ -35,11 +36,16 @@ User.init(
             allowNull: false,
             defaultValue: true,
         },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     },
     {
         sequelize,
         tableName: 'users',
         timestamps: true,
+        paranoid: true,
     },
 )
 export default User
